@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WebsiteMVC.Models.ThuChi>
+
+@{
+    ViewBag.Title = "BÁO CÁO DOANH THU";
+    Layout = "~/Views/Shared/_LayoutAmin.cshtml";
+}
+
+
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-edit"></i>@ViewBag.Title
+        </div>
+    </div>
+    <div class="portlet-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Bắt đầu</span>
+                        <input type="date" class="form-control" placeholder="Bắt đầu" value="@ViewBag.timeStart">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Kết thúc</span>
+                        <input type="date" class="form-control" placeholder="Kết thúc" value="@ViewBag.timeEnd">
+                    </div>
+                </div>
+                <button class="btn btn-primary">Lọc</button>
+            </div>
+            <hr />
+        }
+        <table class="table table-bordered" id="table">
+            <thead>
+                <tr>
+                    <th>Doanh thu</th>
+                    <th>Quỹ</th>
+                    <th>Thu/Chi</th>
+                    <th>Ngày tạo</th>
+                    <th>Mã</th>
+                    <th>Số tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item_grDoanhThu in Model.GroupBy(q => q.DoanhThu.MaDoanhThu))
+                {
+                    var first = true;
+                    foreach (var item in item_grDoanhThu.OrderBy(q => q.CreateTime))
+                    {
+                        <tr>
+                            @if (first)
+                            {
+                                <td rowspan="@item_grDoanhThu.Count()">@item.DoanhThu.TenDoanhThu</td>
+                                first = false;
+                            }
+                            <td>@item.Quy.TenQuy</td>
+                            <td>@((item.DoanhThu.IsThu == true) ? "Thu" : "Chi")</td>
+                            <td>@item.CreateTime</td>
+                            <td>@item.MaThuChi</td>
+                            <td>@((item.SoTien ?? 0).ToString("#,###")) VND</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="5" style="text-align: center"><h4><b>Tổng @item_grDoanhThu.First().DoanhThu.TenDoanhThu</b></h4> </td>
+                        <td><h4><b>@((item_grDoanhThu.Where(q => q.DoanhThu.IsThu ?? false).Sum(q => q.SoTien) - item_grDoanhThu.Where(q => q.DoanhThu.IsThu != true).Sum(q => q.SoTien) ?? 0).ToString("#,###"))</b> VND</h4></td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="5" style="text-align: center"><h3><b>Tổng</b></h3> </td>
+                    <td><h3><b>@((Model.Where(q => q.DoanhThu.IsThu ?? false).Sum(q => q.SoTien) - Model.Where(q => q.DoanhThu.IsThu != true).Sum(q => q.SoTien) ?? 0).ToString("#,###"))</b> VND</h3></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+@section css{
+    <link href="/Content/theme/assets/global/plugins/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+@section js{
+    <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+
+    <script>
+                                                                                                                                //$("#table").DataTable();
+    </script>
+}

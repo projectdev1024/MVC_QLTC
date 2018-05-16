@@ -1,0 +1,134 @@
+﻿@model IEnumerable<WebsiteMVC.Models.Notify>
+
+@{
+    ViewBag.Title = "TRANG CHỦ";
+    Layout = "~/Views/Shared/_LayoutAmin.cshtml";
+}
+<link href="~/Content/theme/assets/admin/pages/css/tasks.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- BEGIN PORTLET -->
+        <div class="portlet light tasks-widget">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <i class="icon-bar-chart theme-font hide"></i>
+                    <span class="caption-subject font-blue-madison bold uppercase">@Model.Count().ToString("#,###00") PHÊ DUYỆT</span>
+                    <span class="caption-helper"> (Cập nhật lúc [@DateTime.Now])</span>
+                </div>
+                <div class="inputs">
+                    <div class="portlet-input input-small input-inline">
+                        <div class="input-icon right">
+                            <i class="icon-magnifier"></i>
+                            <input type="text" class="form-control form-control-solid" placeholder="search...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="task-content">
+                    <div class="scrollers" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                        <!-- START TASK LIST -->
+                        <ul class="task-list feeds">
+                            @foreach (var item in Model)
+                            {
+                                <li class="item">
+                                    <div class="task-title">
+                                        <label>
+                                            <input type="checkbox" class="applyChild" data-controllername="@item.ControllerName" value="@item.ID" name="test" />
+                                            <span class="label label-sm label-success">@item.Type</span>
+                                            <span class="task-title-sp" >
+                                                @item.Message
+                                            </span>
+                                            <span class="task-bell">
+                                                [@item.CreateTime]
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="task-config">
+                                        <div class="task-config-btn btn-group">
+                                            <a class="btn btn-xs default" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li>
+                                                    <a href="javascript:;" onclick="applyAll()">
+                                                        <i class="fa fa-check"></i> Phê duyệt tất cả
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;" onclick="apply(this,1,@item.ID,'@item.ControllerName','@item.Message')">
+                                                        <i class="fa fa-check-circle-o"></i> Phê duyệt
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Edit",item.ControllerName,new { id = item.ID})" target="_blank">
+                                                        <i class="fa fa-pencil"></i> Sửa
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;" onclick="apply(this,0,@item.ID,'@item.ControllerName','@item.Message')">
+                                                        <i class="fa fa-trash-o"></i> Hủy
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        @if (Model.Count() == 0)
+                        {
+                            <p>0 phê duyệt... Thật tuyệt! Bạn có thêm thời gian để làm việc khác...</p>
+                        }
+                        <!-- END START TASK LIST -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET -->
+    </div>
+    <div class="col-md-6">
+        @Html.Action("Task")
+    </div>
+</div>
+
+<style>
+    .success1 {
+        background: #d4ffd1 !important;
+    }
+
+    .success0 {
+        background-color: lightgray !important;
+    }
+</style>
+
+<script>
+    function apply(sender, state, id, controllerName, message) {
+        $.ajax({
+            url: `/${controllerName}/State`,
+            type: 'POST',
+            data: {
+                id: id,
+                state: state
+            },
+            success: function (d) {
+                var k = $(sender).closest('li.item');
+                k.addClass(`success${state}`);
+                k.find('.task-config').remove();
+                if (state == 1) k.find('.checker').html('<i class="fa fa-check"></i>');
+                else k.find('.checker').html('<i class="fa fa-trash"></i>');
+            }, error: function () {
+                alert(`[Phê duyệt/Hủy Thất bại] [${message}]`);
+            }
+        })
+    }
+
+    function applyAll(event) {
+        if (confirm("Bạn muốn duyệt tất cả các ô được chọn?")) {
+            $('.applyChild').each((index, element) => {
+                if (element.checked) apply(element, 1, element.value, $(element).data('controllername'), '');
+            });
+        }
+    }
+</script>

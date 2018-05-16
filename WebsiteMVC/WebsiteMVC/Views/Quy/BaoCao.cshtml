@@ -1,0 +1,90 @@
+﻿@model IEnumerable<WebsiteMVC.Models.BaoCaoQuy>
+
+@{
+    ViewBag.Title = "BÁO CÁO TIỀN MẶT";
+    Layout = "~/Views/Shared/_LayoutAmin.cshtml";
+}
+
+
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-edit"></i>@ViewBag.Title
+        </div>
+    </div>
+    <div class="portlet-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Bắt đầu</span>
+                        <input type="date" class="form-control" placeholder="Bắt đầu" value="@ViewBag.timeStart">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Kết thúc</span>
+                        <input type="date" class="form-control" placeholder="Kết thúc" value="@ViewBag.timeEnd">
+                    </div>
+                </div>
+                <button class="btn btn-primary">Lọc</button>
+            </div>
+            <hr />
+        }
+        <table class="table table-bordered" id="table">
+            <thead>
+                <tr>
+                    <th>Quỹ</th>
+                    <th>Ngày tạo</th>
+                    <th>Mã</th>
+                    <th>Số tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item_grQuy in Model.GroupBy(q => q.Quy.MaQuy))
+                {
+                    var first = true;
+                    foreach (var item in item_grQuy.OrderBy(q => q.CreateTime))
+                    {
+                        <tr>
+                            @if (first)
+                            {
+                                <td rowspan="@item_grQuy.Count()">@item.Quy.MaQuy</td>
+                                first = false;
+                            }
+                            <td>@item.CreateTime</td>
+                            <td>@item.Code</td>
+                            <td>@item.Money.ToString("#,###") VND</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="4" style="text-align: center"><h4><b>Tổng @item_grQuy.Key</b></h4> </td>
+                        <td><h4><b>@item_grQuy.Sum(q => q.Money).ToString("#,###")</b> VND</h4></td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4" style="text-align: center"><h3><b>Tổng</b></h3> </td>
+                    <td><h3><b>@Model.Sum(q => q.Money).ToString("#,###")</b> VND</h3></td>
+                </tr>
+            </tbody>
+        </table>
+
+        @Html.Partial("Chart")
+
+    </div>
+</div>
+
+
+@section css{
+    <link href="/Content/theme/assets/global/plugins/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+@section js{
+    <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+
+    <script>
+                                                                        //$("#table").DataTable();
+    </script>
+}

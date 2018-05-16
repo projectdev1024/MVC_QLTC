@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WebsiteMVC.Models.CTTamUng>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@if (ViewBag.ToAdd == true)
+{
+    <div class="table-toolbar">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit",new { IDTamUng = ViewBag.IDTamUng })" id="sample_editable_1_new" class="btn green">
+                        Thêm <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<table class="table table-bordered" id="tabletable">
+    <thead>
+        <tr>
+            <th>
+                Số tiền
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Người tạo
+            </th>
+            <th>
+                Ghi chú
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                @*<td>
+                        <a href="@Url.Action("Edit",new { id = item.IDCTTamUng})" class="btn btn-primary" title="Sửa"><i class="fa fa-pencil"></i></a>
+                        <span onclick="delete_object(this,'@item.IDCTTamUng')" class="btn btn-warning" title="Xóa"><i class="fa fa-trash-o"></i></span>
+                    </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+@section css{
+    <link href="/Content/theme/assets/global/plugins/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+@section js{
+    <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+
+    <script>
+        $("#tabletable").DataTable();
+
+        @*function delete_object(target, id) {
+            if (confirm("Bạn có muốn xóa không?")) {
+                $.ajax({
+                    url: "@Url.Action("Delete")",
+                    type: "POST",
+                    data: { id: id },
+                    success: function (d) {
+                        if (d) {
+                            $(target).closest("tr").remove();
+                        } else {
+                            alert("Xóa thất bại");
+                        }
+                    }
+                })
+            }
+        }*@
+    </script>
+}

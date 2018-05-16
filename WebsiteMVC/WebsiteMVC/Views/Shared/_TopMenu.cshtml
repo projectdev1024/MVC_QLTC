@@ -1,0 +1,46 @@
+﻿@{
+    var acc = WebsiteMVC.Models.LoginHelper.GetAccount();
+}
+
+<div class="top-menu">
+    <ul class="nav navbar-nav pull-right">
+        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+        <li class="dropdown dropdown-user">
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                <img alt="" class="img-circle" src="@(string.IsNullOrWhiteSpace(acc.Avatar)?"/Content/theme/assets/admin/layout/img/avatar3_small.jpg":acc.Avatar)" />
+                <span class="username username-hide-on-mobile">
+                    @acc.FullName
+                </span>
+                <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-default">
+                <li>
+                    <a href="@Url.Action("Edit","TaiKhoan")">
+                        <i class="icon-user"></i> Thông tin cá nhân
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ChangePassword","TaiKhoan")">
+                        <i class="icon-envelope-open"></i> Đổi mật khẩu
+                    </a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="@Url.Action("Logout","Login", new { Area = ""})">
+                        <i class="icon-key"></i> Đăng xuất
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- END USER LOGIN DROPDOWN -->
+        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+        <li class="dropdown dropdown-quick-sidebar-toggler">
+            <a href="@Url.Action("Logout","Login", new { Area = ""})" class="dropdown-toggle">
+                <i class="icon-logout"></i>
+            </a>
+        </li>
+        <!-- END QUICK SIDEBAR TOGGLER -->
+    </ul>
+</div>

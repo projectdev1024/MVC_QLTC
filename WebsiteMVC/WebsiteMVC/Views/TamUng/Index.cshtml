@@ -1,0 +1,133 @@
+﻿@model IEnumerable<WebsiteMVC.Models.TamUng>
+@using WebsiteMVC.Models
+
+@{
+    ViewBag.Title = "DANH SÁCH TẠM ỨNG";
+    Layout = "~/Views/Shared/_LayoutAdminList.cshtml";
+}
+<div class="table-toolbar">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group">
+                <a href="@Url.Action("Edit")" id="sample_editable_1_new" class="btn green">
+                    Thêm <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered" id="table">
+    <thead>
+        <tr>
+            <th>
+                NGÀY TẠO
+            </th>
+            <th>
+                NGUỒN QUỸ
+            </th>
+            <th>
+                MÃ SỐ THUẾ
+            </th>
+            <th>
+                SỐ TIỀN
+            </th>
+            <th>
+                HẠN THANH TOÁN
+            </th>
+            <th>
+                TRẠNG THÁI
+            </th>
+            <th>
+                NGƯỜI TẠO
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                </td>
+                <td>@item.Quy.MaQuy </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MST)
+                </td>
+                <td>
+                    @(item.SoTienDaUng?.ToString("#,###"))VND
+                </td>
+                <td>
+                    @(item.HanThanhToan?.ToString("d"))
+                </td>
+                <td>
+                    @switch (item.State)
+                    {
+                        case 1:
+                            <label class="label label-success">Hoàn thành</label>
+                            break;
+                        default:
+                            var con = (item.HanThanhToan.Value - DateTime.Now).Days;
+                            if (con > 0)
+                            {
+                                <b>Còn @con  ngày</b>
+                            }
+                            else
+                            {
+                                <b class="label-danger">Quá hạn @(con * -1) ngày</b>
+                            }
+                            break;
+                    }
+                </td>
+                <td>
+                    @item.TaiKhoan.FullName
+                </td>
+                <td>
+                    @if (item.State == Notify.CANCLE)
+                    {
+                        <label class="label label-default">Đã bị hủy</label>
+                    }
+                    else
+                    {
+                        if (item.State == Notify.INIT)
+                        {
+                            <label class="label label-default">Chờ phê duyệt</label>
+                        }
+                        else
+                        {
+                            if (item.State == Notify.SUCCESS)
+                            {
+                                <label class="label label-success">Đã thanh toán</label>
+                            }
+                            <span class="btn btn-default" onclick="cttamung('@item.IDTamUng')"><i class="fa fa-info"></i> Lịch sử</span>
+                        }
+                        <a href="@Url.Action("Edit",new { id = item.IDTamUng})" class="btn btn-primary" title="Sửa"><i class="fa fa-pencil"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function cttamung(id) {
+            $.ajax({
+                url: "@Url.Action("Index","CTTamUng")",
+                data: {
+                    IDTamUng: id
+                },
+                type: 'GET',
+                success: function (d) {
+                    $('#cttamung').html(d);
+                }
+            });
+    }
+</script>
+
+<hr />
+<div>
+    Chi tiết tạm ứng
+    <div id="cttamung">
+        Click <u>Lịch sử</u> để xem.
+    </div>
+</div>

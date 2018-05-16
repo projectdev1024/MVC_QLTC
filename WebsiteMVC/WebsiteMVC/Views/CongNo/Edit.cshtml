@@ -1,0 +1,112 @@
+﻿@model WebsiteMVC.Models.CongNo
+
+@{
+    ViewBag.Title = "CÔNG NỢ";
+    Layout = "~/Views/Shared/_LayoutAdminEdit.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDCongNo)
+        @Html.HiddenFor(model => model.CreateBy)
+        @Html.HiddenFor(model => model.CreateTime)
+        @Html.HiddenFor(model => model.State)
+        @Html.HiddenFor(model => model.Payed)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoTien, "Số tiền (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                <div class="input-group">
+                    @if (Model.State == WebsiteMVC.Models.Notify.INIT)
+                    {
+                        @Html.TextBoxFor(model => model.SoTien, new { @class = "form-control", type = "number", required = "true", Min = "0" })
+                        <span class="input-group-addon" id="basic-addon1">VND</span>
+                    }
+                    else
+                    {
+                        <p class="form-control">
+                            @Html.DisplayFor(model => model.SoTien) <label>VND</label>
+                            @Html.HiddenFor(q => q.SoTien)
+                        </p>
+                    }
+                </div>
+            </div>
+            @Html.LabelFor(model => model.IDQuy, "Nguồn quỹ (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @if (Model.State == WebsiteMVC.Models.Notify.INIT)
+                {
+                    @Html.DropDownListFor(q => q.IDQuy, ViewBag.IDQuys as SelectList, "Vui lòng chọn", htmlAttributes: new { @class = "form-control", required = "true" })
+                }
+                else
+                {
+                    <p class="form-control">
+                        @Html.DisplayFor(model => model.Quy.mName)
+                        @Html.HiddenFor(q => q.IDQuy)
+                    </p>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaCongNo, "Mã công nợ(*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <label>
+                            @Html.CheckBoxFor(q => q.Cong) Là khoản tiền cho khách hàng vay(công)?
+                        </label>
+                    </span>
+                    @Html.TextBoxFor(q => q.MaCongNo, htmlAttributes: new { @class = "form-control", required = "true" })
+                </div>
+            </div>
+            @Html.LabelFor(model => model.MaSoThue, "Mã số thuế (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.MaSoThue, new { htmlAttributes = new { @class = "form-control", required = "true" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2"></p>
+            <p class="col-md-10">*** <i>Sau khi phê duyệt, số tiền tài khoản sẽ thay đổi và không cho phép chỉnh sửa!</i></p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgayTra, "Ngày trả (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NgayTra, new { htmlAttributes = new { @class = "form-control", type = "date", Value = Model.NgayTra?.ToString("yyyy-MM-dd"), required = "true" } })
+            </div>
+            @Html.LabelFor(model => model.LaiSuat, "Lãi suất (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.EditorFor(model => model.LaiSuat, new { htmlAttributes = new { @class = "form-control", type = "number", step = "1", required = "true" } })
+                    <span class="input-group-addon" id="basic-addon1">%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MucDich, "Mục đích (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.MucDich, new { @class = "form-control", Rows = "10" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, "Ghi chú", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Note, new { @class = "form-control", Rows = "10" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn green" />
+            </div>
+        </div>
+    </div>
+}

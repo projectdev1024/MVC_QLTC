@@ -1,0 +1,88 @@
+﻿@model WebsiteMVC.Models.ThuChi
+
+@{
+    ViewBag.Title = "THU CHI";
+    Layout = "~/Views/Shared/_LayoutAdminEdit.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDThuChi)
+        @Html.HiddenFor(model => model.CreateBy)
+        @Html.HiddenFor(model => model.CreateTime)
+        @Html.HiddenFor(model => model.State)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoTien, "Số tiền (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                <div class="input-group">
+                    @if (Model.State == WebsiteMVC.Models.Notify.INIT)
+                    {
+                        @Html.TextBoxFor(model => model.SoTien, new { @class = "form-control", type = "number", required = "true", Min = "0" })
+                    }
+                    else
+                    {
+                        <label class="form-control">@Model.SoTien</label>
+                        @Html.HiddenFor(q => q.SoTien)
+                    }
+                    <span class="input-group-addon" id="basic-addon1">VND</span>
+                </div>
+            </div>
+
+            @Html.LabelFor(model => model.IDQuy, "Nguồn quỹ (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @if (Model.State == WebsiteMVC.Models.Notify.INIT)
+                {
+                    @Html.DropDownListFor(q => q.IDQuy, ViewBag.IDQuys as SelectList, "Vui lòng chọn", new { @class = "form-control", required = "true" })
+                }
+                else
+                {
+                    <label class="form-control">@Model.Quy.mName</label>
+                    @Html.HiddenFor(q => q.IDQuy)
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoTien, " ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <p class="col-md-10">*** <i>Sau khi thêm hoàn thành, số tiền tài khoản sẽ thay đổi và không cho phép chỉnh sửa!</i></p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaThuChi, "Mã thu chi (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                <div class="input-group">
+                    <label class="input-group-addon">
+                        @Html.CheckBoxFor(q => q.Thu) Là khoản Thu?
+                    </label>
+                    @Html.TextBoxFor(model => model.MaThuChi, new { @class = "form-control", required = "true" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MucDich, "Mục đích", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.MucDich, new { @class = "form-control", @Rows = "10" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, "Ghi chú", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Note, new { @class = "form-control", @Rows = "10" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn green" />
+            </div>
+        </div>
+    </div>
+}

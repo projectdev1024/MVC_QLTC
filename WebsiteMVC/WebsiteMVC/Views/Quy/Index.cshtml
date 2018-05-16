@@ -1,0 +1,123 @@
+﻿@model IEnumerable<WebsiteMVC.Models.Quy>
+@using WebsiteMVC.Models
+
+@{
+    ViewBag.Title = "DANH SÁCH QUỸ";
+    Layout = "~/Views/Shared/_LayoutAdminList.cshtml";
+}
+
+<hr />
+<p>Biểu đồ thanh toán tiền nợ theo thời gian</p>
+@using (Html.BeginForm())
+{
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">Từ ngày</span>
+            <input type="date" name="stimeStart" value="@ViewBag.timeStart" class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">Đến ngày ngày</span>
+            <input type="date" name="stimeEnd" value="@ViewBag.timeEnd" class="form-control" />
+        </div>
+    </div>
+    <button class="btn">Xem</button>
+    <button class="btn" name="submit" value="excel">Xuất excel</button>
+}
+<hr />
+<div id="linechart_material" style="width: 900px; height: 500px"></div>
+<hr />
+
+
+<div class="table-toolbar">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group">
+                <a href="@Url.Action("Edit")" id="sample_editable_1_new" class="btn green">
+                    Thêm <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered" id="table">
+    <thead>
+        <tr>
+            <th>
+                MÃ QUỸ
+            </th>
+            <th>
+                TÊN QUỸ
+            </th>
+            <th>
+                SỐ TIỀN HIỆN CÒN
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.MaQuy)</p>
+                    @if (item.State == WebsiteMVC.Models.Notify.INIT)
+                    {
+                        <label class="label label-default">Chờ phê duyệt</label>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenQuy)
+                </td>
+                <td>
+                    @(item.Money?.ToString("#,###")) VND
+                </td>
+                <td>
+                    @if (item.State == Notify.CANCLE)
+                    {
+                        <label class="label label-default">Đã hủy</label>
+                    }
+                    else
+                    {
+                        if (item.State == Notify.INIT)
+                        {
+                            <label class="label label-info">Chờ phê duyệt</label>
+                            <span onclick="delete_object(this,'@item.IDQuy')" class="btn btn-warning" title="Cancle"><i class="fa fa-trash-o"></i></span>
+                        }
+                        <a href="@Url.Action("Edit",new { id = item.IDQuy})" class="btn btn-primary" title="Sửa"><i class="fa fa-pencil"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/Scripts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['line'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Tháng');
+        data.addColumn('number', 'Nguồn vào');
+        data.addColumn('number', 'Nguồn ra');
+
+        data.addRows(@Html.Raw(ViewBag.data));
+        var options = {
+            chart: {
+                title: 'SỐ TIỀN QUỸ THEO THỜI GIAN',
+                subtitle: 'đơn vị (VND)'
+            },
+            width: 900,
+            height: 500
+        };
+
+        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+</script>

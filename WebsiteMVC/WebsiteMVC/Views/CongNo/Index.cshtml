@@ -1,0 +1,176 @@
+﻿@model IEnumerable<WebsiteMVC.Models.CongNo>
+@using WebsiteMVC.Models
+
+@{
+    ViewBag.Title = "CÔNG NỢ";
+    Layout = "~/Views/Shared/_LayoutAdminList.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">Từ ngày</span>
+            <input type="date" name="stimeStart" value="@ViewBag.timeStart" class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">Đến ngày ngày</span>
+            <input type="date" name="stimeEnd" value="@ViewBag.timeEnd" class="form-control" />
+        </div>
+    </div>
+    <button class="btn">Xem</button>
+    <button class="btn" name="submit" value="excel">Xuất excel</button>
+}
+<hr />
+<p>Biểu đồ thanh toán tiền nợ theo thời gian</p>
+<div id="linechart_material" style="width: 900px; height: 500px"></div>
+<hr />
+
+<div class="table-toolbar">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group">
+                <a href="@Url.Action("Edit")" id="sample_editable_1_new" class="btn green">
+                    Thêm <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered" id="table">
+    <thead>
+        <tr>
+            <th>
+                NGÀY TẠO
+            </th>
+            <th>
+                TÀI KHOẢN
+            </th>
+            <th>MÃ CÔNG NỢ</th>
+            <th>
+                SỐ TIỀN
+            </th>
+            <th>
+                LÃI SUẤT
+            </th>
+            <th>PHẢI TRẢ</th>
+            <th>
+                ĐÃ TRẢ
+            </th>
+            <th>
+                HẠN TRẢ
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                </td>
+                <td>@item.Quy.MaQuy</td>
+                <td>@item.MaCongNo</td>
+                <td>
+                    @(item.SoTien?.ToString("#,###"))VND
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LaiSuat) %
+                </td>
+                <td>@item.PhaiTra.ToString("#,###") VND</td>
+                <td>
+                    @(item.Payed?.ToString("#,###")) VND (@((item.Payed * 100 / item.PhaiTra)?.ToString("N2")) %)
+                </td>
+                <td>
+                    @(item.NgayTra?.ToShortDateString())
+                    (@{
+                        var con = (item.NgayTra.Value - DateTime.Now).Days;
+                        if (con > 0)
+                        {
+                            <b>Còn @con  ngày</b>
+                        }
+                        else
+                        {
+                            <b>Quá hạn @(con * -1) ngày</b>
+                        }
+                    })
+                </td>
+                <td>
+
+                    @if (item.State == Notify.CANCLE)
+                    {
+                        <label class="label label-default">Đã bị hủy</label>
+                    }
+                    else
+                    {
+                        if (item.State == Notify.INIT)
+                        {
+                            <label class="label label-default">Chờ phê duyệt</label>
+                        }
+                        else
+                        {
+                            <a onclick="ChiTiet('@item.IDCongNo')" class="btn btn-info"><i class="fa fa-check-circle-o"></i> LS Thanh toán </a>
+                        }
+                        if (item.State == Notify.SUCCESS)
+                        {
+                            <label class="label label-success">Đã thanh toán</label>
+                        }
+                        <a href="@Url.Action("Edit",new { id = item.IDCongNo})" class="btn btn-primary" title="Sửa"><i class="fa fa-pencil"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
+<div>
+    <div id="chitiet"> *** Click Thanh toán để xem lịch sử thanh toán</div>
+</div>
+
+<script>
+    function ChiTiet(IDCongNo) {
+        $.ajax({
+                url: "@Url.Action("Index","ThanhToan")",
+                type: 'GET',
+                data: {
+                    id: IDCongNo,
+                },
+                success: function (d) {
+                    $('#chitiet').html(d);
+                }
+            });
+    }
+</script>
+
+
+
+<script src="~/Scripts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['line'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Tháng');
+        data.addColumn('number', 'Phải thanh toán');
+        data.addColumn('number', 'Đã thanh toán');
+
+        data.addRows(@Html.Raw(ViewBag.data));
+        var options = {
+            chart: {
+                title: 'THANH TOÁN TIỀN NỢ THEO THỜI GIAN',
+                subtitle: 'đơn vị (VND)'
+            },
+            width: 900,
+            height: 500
+        };
+
+        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+</script>

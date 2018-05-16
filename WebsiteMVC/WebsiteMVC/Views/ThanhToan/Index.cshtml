@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebsiteMVC.Models.ThanhToan>
+
+@{
+    ViewBag.Title = "";
+    var accept = WebsiteMVC.Models.LoginHelper.CheckRole(WebsiteMVC.Models.eRole.ADMIN);
+    var congno = ViewBag.congno as WebsiteMVC.Models.CongNo;
+}
+<p>Chi tiết thanh toán @congno.MaCongNo</p>
+@if (congno.State == WebsiteMVC.Models.Notify.SUCCESS)
+{
+    <p class="label label-success">Đã thanh toán đầy đủ</p>
+    <br />
+}
+else if (accept)
+{
+    <div class="table-toolbar">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit",new { IDCongNo=ViewBag.IDCongNo})" id="sample_editable_1_new" class="btn green">
+                        Thêm <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<table class="table table-bordered" id="table">
+    <thead>
+        <tr>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Người tạo
+            </th>
+            <th>
+                Số tiền thanh toán
+            </th>
+            <th>
+                Chi chú
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan.FullName)
+                </td>
+                <td>
+                    @(item.SoTienTra?.ToString("#,###")) VND
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

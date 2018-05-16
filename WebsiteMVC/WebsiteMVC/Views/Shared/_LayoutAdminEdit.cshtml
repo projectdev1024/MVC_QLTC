@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAmin.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-pencil"></i> @ViewBag.Title</div>
+    <div class="panel-body">
+        @RenderBody()
+        <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> QUAY LẠI DANH SÁCH</a>
+    </div>
+</div>

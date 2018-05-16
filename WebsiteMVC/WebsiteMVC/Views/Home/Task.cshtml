@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebsiteMVC.Models.Notify>
+<!-- BEGIN PORTLET -->
+<div class="portlet light">
+    <div class="portlet-title tabbable-line">
+        <div class="caption caption-md">
+            <i class="icon-globe theme-font hide"></i>
+            <span class="caption-subject font-blue-madison bold uppercase"> @Model.Count() THÔNG BÁO</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <!--BEGIN TABS-->
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1_1">
+                <div class="scrollers" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                    <ul class="feeds">
+                        @foreach (var item in Model)
+                        {
+                            <li>
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm label-success">
+                                                <i class="fa fa-bell-o"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                @item.Type
+                                                @item.Message
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2" style="width: 250px; margin-left: -250px">
+                                    <div class="date">
+                                        @item.CreateTime
+                                        <span style="cursor: pointer" onclick="ok(this,@item.ID,'@item.ControllerName')">
+                                            <i class="fa fa-eye" title="đánh dấu đã đọc"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        @*<li style="text-align: right">
+                            <a href="#" class="btn btn-primary"><i class="fa fa-long-arrow-down"></i> Xem thêm</a>
+                        </li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--END TABS-->
+    </div>
+</div>
+<!-- END PORTLET -->
+
+<script>
+    function ok(sender, id, controller) {
+        $.ajax({
+            url: `/${controller}/State`,
+            type: 'POST',
+            data: {
+                id: id,
+                state: @WebsiteMVC.Models.Notify.SEEN
+            },
+            success: function (d) {
+                $(sender).closest('li').addClass('success1');
+                $(sender).remove();
+            }
+        })
+    }
+</script>
