@@ -23,7 +23,6 @@ namespace WebsiteMVC.Models
         public int IDCongNo { get; set; }
         public Nullable<int> IDQuy { get; set; }
         public string MucDich { get; set; }
-        public Nullable<decimal> SoTien { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<double> LaiSuat { get; set; }
         public string MaSoThue { get; set; }
@@ -33,7 +32,9 @@ namespace WebsiteMVC.Models
         public string MaCongNo { get; set; }
         public Nullable<byte> State { get; set; }
         public Nullable<int> IDKhoanVay { get; set; }
+        public Nullable<decimal> SoTien { get; set; }
         public Nullable<decimal> Payed { get; set; }
+        public Nullable<decimal> ConNo { get; set; }
     
         public virtual TaiKhoan TaiKhoan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

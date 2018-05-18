@@ -50,6 +50,7 @@ namespace WebsiteMVC.Controllers
         [HttpPost]
         public ActionResult Edit(ThanhToan thanhToan)
         {
+            var congno = db.CongNoes.Find(thanhToan.IDCongNo);
             if (thanhToan.IDThanhToan > 0)
             {
                 db.Entry(thanhToan).State = EntityState.Modified;
@@ -59,15 +60,15 @@ namespace WebsiteMVC.Controllers
                 thanhToan.CreateTime = DateTime.Now;
                 thanhToan.CreateBy = Account.IDTaiKhoan;
                 thanhToan.State = Notify.INIT;
+                congno.Payed += thanhToan.SoTienTra;
                 db.ThanhToans.Add(thanhToan);
             }
-            var congno = db.CongNoes.Find(thanhToan.IDCongNo);
-            congno.Payed += thanhToan.SoTienTra;
-            var phaitra = congno.SoTien * ((decimal)(congno.LaiSuat ?? 0) + 100) / 100;
-            if (congno.Payed >= phaitra)
+            if (congno.Payed >= congno.PhaiTra)
             {
                 congno.State = Notify.SUCCESS;
             }
+            thanhToan.ConNo = congno.Tra1Ngay * (congno.NgayTra - thanhToan.CreateTime).Value.Days - congno.Payed;
+            congno.ConNo = congno.Tra1Ngay * (congno.NgayTra - thanhToan.CreateTime).Value.Days - congno.Payed;
             db.SaveChanges();
             return RedirectToAction("Index", "CongNo", new { thanhToan.IDCongNo });
         }

@@ -12,7 +12,6 @@
           <Property Name="IDCongNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDQuy" Type="int" />
           <Property Name="MucDich" Type="nvarchar" MaxLength="500" />
-          <Property Name="SoTien" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="LaiSuat" Type="float" />
           <Property Name="MaSoThue" Type="nvarchar" MaxLength="50" />
@@ -22,7 +21,9 @@
           <Property Name="MaCongNo" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="tinyint" />
           <Property Name="IDKhoanVay" Type="int" />
+          <Property Name="SoTien" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Payed" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ConNo" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="CTTamUng">
           <Key>
@@ -349,7 +350,6 @@
           <Property Name="IDCongNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDQuy" Type="Int32" />
           <Property Name="MucDich" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SoTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="LaiSuat" Type="Double" />
           <Property Name="MaSoThue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -359,7 +359,9 @@
           <Property Name="MaCongNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Byte" />
           <Property Name="IDKhoanVay" Type="Int32" />
+          <Property Name="SoTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Payed" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ConNo" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_CongNo_TaiKhoan" FromRole="CongNo" ToRole="TaiKhoan" />
           <NavigationProperty Name="ThanhToans" Relationship="QLTCModel.FK_CTCongNo_CongNo" FromRole="CongNo" ToRole="ThanhToan" />
           <NavigationProperty Name="Quy" Relationship="QLTCModel.FK_VayNo_Quy" FromRole="CongNo" ToRole="Quy" />
@@ -604,7 +606,9 @@
           <EntitySetMapping Name="CongNoes">
             <EntityTypeMapping TypeName="QLTCModel.CongNo">
               <MappingFragment StoreEntitySet="CongNo">
+                <ScalarProperty Name="ConNo" ColumnName="ConNo" />
                 <ScalarProperty Name="Payed" ColumnName="Payed" />
+                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
                 <ScalarProperty Name="IDKhoanVay" ColumnName="IDKhoanVay" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="MaCongNo" ColumnName="MaCongNo" />
@@ -614,7 +618,6 @@
                 <ScalarProperty Name="MaSoThue" ColumnName="MaSoThue" />
                 <ScalarProperty Name="LaiSuat" ColumnName="LaiSuat" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
                 <ScalarProperty Name="MucDich" ColumnName="MucDich" />
                 <ScalarProperty Name="IDQuy" ColumnName="IDQuy" />
                 <ScalarProperty Name="IDCongNo" ColumnName="IDCongNo" />

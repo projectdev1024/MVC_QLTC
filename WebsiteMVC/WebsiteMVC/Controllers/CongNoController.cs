@@ -32,7 +32,7 @@ namespace WebsiteMVC.Controllers
             bool first = true;
             for (DateTime date = new DateTime(timeStart.Year, timeStart.Month, 1); date <= timeEnd; date = date.AddMonths(1))
             {
-                d += $"{(first ? "" : ",")}['{date.ToString("MM/yyyy")}',{gr.FirstOrDefault(q => q.Key == date)?.Sum(q => q.PhaiTra) ?? 0},{gr.FirstOrDefault(q => q.Key == date)?.Sum(q => q.Payed) ?? 0}]";
+                d += $"{(first ? "" : ",")}['{date.ToString("MM/yyyy")}',{gr.FirstOrDefault(q => q.Key == date)?.Sum(q => q.ConNo) ?? 0},{gr.FirstOrDefault(q => q.Key == date)?.Sum(q => q.Payed) ?? 0}]";
                 first = false;
             }
             d += "]";
@@ -68,10 +68,11 @@ namespace WebsiteMVC.Controllers
             }
             else
             {
+                obj.State = Notify.INIT;
                 obj.CreateBy = Account.IDTaiKhoan;
                 obj.CreateTime = DateTime.Now;
+                obj.ConNo = obj.Tra1Ngay * (obj.NgayTra - obj.CreateTime).Value.Days ?? 0 ;
                 obj.Payed = 0;
-                obj.State = Notify.INIT;
                 db.CongNoes.Add(obj);
             }
 

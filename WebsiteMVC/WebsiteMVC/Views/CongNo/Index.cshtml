@@ -53,7 +53,7 @@
                 SỐ TIỀN
             </th>
             <th>
-                LÃI SUẤT
+                LÃI SUẤT (%năm)
             </th>
             <th>PHẢI TRẢ</th>
             <th>
@@ -80,9 +80,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.LaiSuat) %
                 </td>
-                <td>@item.PhaiTra.ToString("#,###") VND</td>
+                <td>@(item.PhaiTra?.ToString("#,###")) VND</td>
                 <td>
-                    @(item.Payed?.ToString("#,###")) VND (@((item.Payed * 100 / item.PhaiTra)?.ToString("N2")) %)
+                    @(item.Payed?.ToString("#,###")) VND (@(item.TyLe?.ToString("N2")) %)
                 </td>
                 <td>
                     @(item.NgayTra?.ToShortDateString())

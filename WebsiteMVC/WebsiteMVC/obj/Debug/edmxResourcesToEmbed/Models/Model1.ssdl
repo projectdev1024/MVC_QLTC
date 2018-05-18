@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLTCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CongNo">
+    <Key>
+      <PropertyRef Name="IDCongNo" />
+    </Key>
+    <Property Name="IDCongNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDQuy" Type="int" />
+    <Property Name="MucDich" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LaiSuat" Type="float" />
+    <Property Name="MaSoThue" Type="nvarchar" MaxLength="50" />
+    <Property Name="NgayTra" Type="date" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Note" Type="nvarchar" MaxLength="500" />
+    <Property Name="MaCongNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="tinyint" />
+    <Property Name="IDKhoanVay" Type="int" />
+    <Property Name="SoTien" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Payed" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ConNo" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="CTTamUng">
+    <Key>
+      <PropertyRef Name="IDCTTamUng" />
+    </Key>
+    <Property Name="IDCTTamUng" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDTamUng" Type="int" />
+    <Property Name="SoTien" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="State" Type="tinyint" />
+    <Property Name="Note" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Quy">
+    <Key>
+      <PropertyRef Name="IDQuy" />
+    </Key>
+    <Property Name="IDQuy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenQuy" Type="nvarchar" MaxLength="500" />
+    <Property Name="Money" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Info" Type="nvarchar" MaxLength="500" />
+    <Property Name="MaQuy" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="tinyint" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="IDTaiKhoan" />
+    </Key>
+    <Property Name="IDTaiKhoan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Avatar" Type="nvarchar" MaxLength="500" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Birthday" Type="date" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="POSITION" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="TamUng">
+    <Key>
+      <PropertyRef Name="IDTamUng" />
+    </Key>
+    <Property Name="IDTamUng" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MST" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoTienDaUng" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="HanThanhToan" Type="date" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Note" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDQuy" Type="int" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="MaTamUng" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="ThanhToan">
+    <Key>
+      <PropertyRef Name="IDThanhToan" />
+    </Key>
+    <Property Name="IDThanhToan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCongNo" Type="int" />
+    <Property Name="SoTienTra" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ConNo" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="Note" Type="nvarchar" MaxLength="500" />
+    <Property Name="State" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="ThuChi">
+    <Key>
+      <PropertyRef Name="IDThuChi" />
+    </Key>
+    <Property Name="IDThuChi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDQuy" Type="int" />
+    <Property Name="MucDich" Type="nvarchar" MaxLength="500" />
+    <Property Name="SoTien" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Note" Type="nvarchar" MaxLength="500" />
+    <Property Name="MaThuChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="tinyint" />
+  </EntityType>
+  <Association Name="FK_CongNo_TaiKhoan">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Principal>
+      <Dependent Role="CongNo">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTCongNo_CongNo">
+    <End Role="CongNo" Type="Self.CongNo" Multiplicity="0..1" />
+    <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CongNo">
+        <PropertyRef Name="IDCongNo" />
+      </Principal>
+      <Dependent Role="ThanhToan">
+        <PropertyRef Name="IDCongNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTTamUng_TamUng">
+    <End Role="TamUng" Type="Self.TamUng" Multiplicity="0..1" />
+    <End Role="CTTamUng" Type="Self.CTTamUng" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TamUng">
+        <PropertyRef Name="IDTamUng" />
+      </Principal>
+      <Dependent Role="CTTamUng">
+        <PropertyRef Name="IDTamUng" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quy_TaiKhoan">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="Quy" Type="Self.Quy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Principal>
+      <Dependent Role="Quy">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TamUng_Quy">
+    <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+    <End Role="TamUng" Type="Self.TamUng" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quy">
+        <PropertyRef Name="IDQuy" />
+      </Principal>
+      <Dependent Role="TamUng">
+        <PropertyRef Name="IDQuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TamUng_TaiKhoan">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="TamUng" Type="Self.TamUng" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Principal>
+      <Dependent Role="TamUng">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ThanhToan_TaiKhoan">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Principal>
+      <Dependent Role="ThanhToan">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ThuChi_Account">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="ThuChi" Type="Self.ThuChi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Principal>
+      <Dependent Role="ThuChi">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ThuChi_Quy">
+    <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+    <End Role="ThuChi" Type="Self.ThuChi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quy">
+        <PropertyRef Name="IDQuy" />
+      </Principal>
+      <Dependent Role="ThuChi">
+        <PropertyRef Name="IDQuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VayNo_Quy">
+    <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+    <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quy">
+        <PropertyRef Name="IDQuy" />
+      </Principal>
+      <Dependent Role="CongNo">
+        <PropertyRef Name="IDQuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLTCModelStoreContainer">
+    <EntitySet Name="CongNo" EntityType="Self.CongNo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTTamUng" EntityType="Self.CTTamUng" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quy" EntityType="Self.Quy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TamUng" EntityType="Self.TamUng" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThanhToan" EntityType="Self.ThanhToan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThuChi" EntityType="Self.ThuChi" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CongNo_TaiKhoan" Association="Self.FK_CongNo_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="CongNo" EntitySet="CongNo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTCongNo_CongNo" Association="Self.FK_CTCongNo_CongNo">
+      <End Role="CongNo" EntitySet="CongNo" />
+      <End Role="ThanhToan" EntitySet="ThanhToan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTTamUng_TamUng" Association="Self.FK_CTTamUng_TamUng">
+      <End Role="TamUng" EntitySet="TamUng" />
+      <End Role="CTTamUng" EntitySet="CTTamUng" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quy_TaiKhoan" Association="Self.FK_Quy_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="Quy" EntitySet="Quy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TamUng_Quy" Association="Self.FK_TamUng_Quy">
+      <End Role="Quy" EntitySet="Quy" />
+      <End Role="TamUng" EntitySet="TamUng" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TamUng_TaiKhoan" Association="Self.FK_TamUng_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="TamUng" EntitySet="TamUng" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThanhToan_TaiKhoan" Association="Self.FK_ThanhToan_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="ThanhToan" EntitySet="ThanhToan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThuChi_Account" Association="Self.FK_ThuChi_Account">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="ThuChi" EntitySet="ThuChi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThuChi_Quy" Association="Self.FK_ThuChi_Quy">
+      <End Role="Quy" EntitySet="Quy" />
+      <End Role="ThuChi" EntitySet="ThuChi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VayNo_Quy" Association="Self.FK_VayNo_Quy">
+      <End Role="Quy" EntitySet="Quy" />
+      <End Role="CongNo" EntitySet="CongNo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

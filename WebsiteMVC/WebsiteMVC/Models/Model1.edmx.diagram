@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d22ab4fc4a114d91b0fbfe903d215427" Name="Diagram1">
-        <EntityTypeShape EntityType="QLTCModel.CongNo" Width="1.5" PointX="5.25" PointY="7.875" />
-        <EntityTypeShape EntityType="QLTCModel.CTTamUng" Width="1.5" PointX="10.5" PointY="8.75" />
-        <EntityTypeShape EntityType="QLTCModel.Quy" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="QLTCModel.CongNo" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="QLTCModel.CTTamUng" Width="1.5" PointX="10.5" PointY="9" />
+        <EntityTypeShape EntityType="QLTCModel.Quy" Width="1.5" PointX="3" PointY="11.5" />
         <EntityTypeShape EntityType="QLTCModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="QLTCModel.TaiKhoan" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="QLTCModel.TamUng" Width="1.5" PointX="8.25" PointY="8.25" />
-        <EntityTypeShape EntityType="QLTCModel.ThanhToan" Width="1.5" PointX="7.5" PointY="4.5" />
-        <EntityTypeShape EntityType="QLTCModel.ThuChi" Width="1.5" PointX="5.25" PointY="13.5" />
+        <EntityTypeShape EntityType="QLTCModel.TaiKhoan" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="QLTCModel.TamUng" Width="1.5" PointX="8.25" PointY="8.375" />
+        <EntityTypeShape EntityType="QLTCModel.ThanhToan" Width="1.5" PointX="7.5" PointY="4.75" />
+        <EntityTypeShape EntityType="QLTCModel.ThuChi" Width="1.5" PointX="5.25" PointY="13.625" />
         <AssociationConnector Association="QLTCModel.FK_CongNo_TaiKhoan" />
         <AssociationConnector Association="QLTCModel.FK_CTCongNo_CongNo" />
         <AssociationConnector Association="QLTCModel.FK_VayNo_Quy" />
