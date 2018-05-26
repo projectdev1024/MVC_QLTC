@@ -95,7 +95,6 @@
     <Property Name="IDThanhToan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDCongNo" Type="int" />
     <Property Name="SoTienTra" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="ConNo" Type="decimal" Precision="18" Scale="0" />
     <Property Name="CreateBy" Type="int" />
     <Property Name="CreateTime" Type="datetime" />
     <Property Name="Note" Type="nvarchar" MaxLength="500" />

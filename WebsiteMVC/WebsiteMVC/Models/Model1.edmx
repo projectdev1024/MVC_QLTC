@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QLTCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QLTCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CongNo">
           <Key>
             <PropertyRef Name="IDCongNo" />
@@ -289,60 +289,11 @@
             <End Role="CongNo" EntitySet="CongNo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLTCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="QLTCEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CongNoes" EntityType="QLTCModel.CongNo" />
-          <EntitySet Name="CTTamUngs" EntityType="QLTCModel.CTTamUng" />
-          <EntitySet Name="Quys" EntityType="QLTCModel.Quy" />
-          <EntitySet Name="sysdiagrams" EntityType="QLTCModel.sysdiagram" />
-          <EntitySet Name="TaiKhoans" EntityType="QLTCModel.TaiKhoan" />
-          <EntitySet Name="TamUngs" EntityType="QLTCModel.TamUng" />
-          <EntitySet Name="ThanhToans" EntityType="QLTCModel.ThanhToan" />
-          <EntitySet Name="ThuChis" EntityType="QLTCModel.ThuChi" />
-          <AssociationSet Name="FK_CongNo_TaiKhoan" Association="QLTCModel.FK_CongNo_TaiKhoan">
-            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-            <End Role="CongNo" EntitySet="CongNoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CTCongNo_CongNo" Association="QLTCModel.FK_CTCongNo_CongNo">
-            <End Role="CongNo" EntitySet="CongNoes" />
-            <End Role="ThanhToan" EntitySet="ThanhToans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VayNo_Quy" Association="QLTCModel.FK_VayNo_Quy">
-            <End Role="Quy" EntitySet="Quys" />
-            <End Role="CongNo" EntitySet="CongNoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CTTamUng_TamUng" Association="QLTCModel.FK_CTTamUng_TamUng">
-            <End Role="TamUng" EntitySet="TamUngs" />
-            <End Role="CTTamUng" EntitySet="CTTamUngs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Quy_TaiKhoan" Association="QLTCModel.FK_Quy_TaiKhoan">
-            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-            <End Role="Quy" EntitySet="Quys" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TamUng_Quy" Association="QLTCModel.FK_TamUng_Quy">
-            <End Role="Quy" EntitySet="Quys" />
-            <End Role="TamUng" EntitySet="TamUngs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ThuChi_Quy" Association="QLTCModel.FK_ThuChi_Quy">
-            <End Role="Quy" EntitySet="Quys" />
-            <End Role="ThuChi" EntitySet="ThuChis" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TamUng_TaiKhoan" Association="QLTCModel.FK_TamUng_TaiKhoan">
-            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-            <End Role="TamUng" EntitySet="TamUngs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ThanhToan_TaiKhoan" Association="QLTCModel.FK_ThanhToan_TaiKhoan">
-            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-            <End Role="ThanhToan" EntitySet="ThanhToans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ThuChi_Account" Association="QLTCModel.FK_ThuChi_Account">
-            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-            <End Role="ThuChi" EntitySet="ThuChis" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="CongNo">
           <Key>
             <PropertyRef Name="IDCongNo" />
@@ -362,9 +313,9 @@
           <Property Name="SoTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Payed" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ConNo" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_CongNo_TaiKhoan" FromRole="CongNo" ToRole="TaiKhoan" />
-          <NavigationProperty Name="ThanhToans" Relationship="QLTCModel.FK_CTCongNo_CongNo" FromRole="CongNo" ToRole="ThanhToan" />
-          <NavigationProperty Name="Quy" Relationship="QLTCModel.FK_VayNo_Quy" FromRole="CongNo" ToRole="Quy" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_CongNo_TaiKhoan" FromRole="CongNo" ToRole="TaiKhoan" />
+          <NavigationProperty Name="ThanhToans" Relationship="Self.FK_CTCongNo_CongNo" FromRole="CongNo" ToRole="ThanhToan" />
+          <NavigationProperty Name="Quy" Relationship="Self.FK_VayNo_Quy" FromRole="CongNo" ToRole="Quy" />
         </EntityType>
         <EntityType Name="CTTamUng">
           <Key>
@@ -377,7 +328,7 @@
           <Property Name="CreateBy" Type="Int32" />
           <Property Name="State" Type="Byte" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TamUng" Relationship="QLTCModel.FK_CTTamUng_TamUng" FromRole="CTTamUng" ToRole="TamUng" />
+          <NavigationProperty Name="TamUng" Relationship="Self.FK_CTTamUng_TamUng" FromRole="CTTamUng" ToRole="TamUng" />
         </EntityType>
         <EntityType Name="Quy">
           <Key>
@@ -391,16 +342,16 @@
           <Property Name="State" Type="Byte" />
           <Property Name="CreateBy" Type="Int32" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CongNoes" Relationship="QLTCModel.FK_VayNo_Quy" FromRole="Quy" ToRole="CongNo" />
-          <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_Quy_TaiKhoan" FromRole="Quy" ToRole="TaiKhoan" />
-          <NavigationProperty Name="TamUngs" Relationship="QLTCModel.FK_TamUng_Quy" FromRole="Quy" ToRole="TamUng" />
-          <NavigationProperty Name="ThuChis" Relationship="QLTCModel.FK_ThuChi_Quy" FromRole="Quy" ToRole="ThuChi" />
+          <NavigationProperty Name="CongNoes" Relationship="Self.FK_VayNo_Quy" FromRole="Quy" ToRole="CongNo" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_Quy_TaiKhoan" FromRole="Quy" ToRole="TaiKhoan" />
+          <NavigationProperty Name="TamUngs" Relationship="Self.FK_TamUng_Quy" FromRole="Quy" ToRole="TamUng" />
+          <NavigationProperty Name="ThuChis" Relationship="Self.FK_ThuChi_Quy" FromRole="Quy" ToRole="ThuChi" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -422,11 +373,11 @@
           <Property Name="POSITION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="CongNoes" Relationship="QLTCModel.FK_CongNo_TaiKhoan" FromRole="TaiKhoan" ToRole="CongNo" />
-          <NavigationProperty Name="Quys" Relationship="QLTCModel.FK_Quy_TaiKhoan" FromRole="TaiKhoan" ToRole="Quy" />
-          <NavigationProperty Name="TamUngs" Relationship="QLTCModel.FK_TamUng_TaiKhoan" FromRole="TaiKhoan" ToRole="TamUng" />
-          <NavigationProperty Name="ThanhToans" Relationship="QLTCModel.FK_ThanhToan_TaiKhoan" FromRole="TaiKhoan" ToRole="ThanhToan" />
-          <NavigationProperty Name="ThuChis" Relationship="QLTCModel.FK_ThuChi_Account" FromRole="TaiKhoan" ToRole="ThuChi" />
+          <NavigationProperty Name="CongNoes" Relationship="Self.FK_CongNo_TaiKhoan" FromRole="TaiKhoan" ToRole="CongNo" />
+          <NavigationProperty Name="Quys" Relationship="Self.FK_Quy_TaiKhoan" FromRole="TaiKhoan" ToRole="Quy" />
+          <NavigationProperty Name="TamUngs" Relationship="Self.FK_TamUng_TaiKhoan" FromRole="TaiKhoan" ToRole="TamUng" />
+          <NavigationProperty Name="ThanhToans" Relationship="Self.FK_ThanhToan_TaiKhoan" FromRole="TaiKhoan" ToRole="ThanhToan" />
+          <NavigationProperty Name="ThuChis" Relationship="Self.FK_ThuChi_Account" FromRole="TaiKhoan" ToRole="ThuChi" />
         </EntityType>
         <EntityType Name="TamUng">
           <Key>
@@ -443,9 +394,9 @@
           <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="MaTamUng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Byte" />
-          <NavigationProperty Name="CTTamUngs" Relationship="QLTCModel.FK_CTTamUng_TamUng" FromRole="TamUng" ToRole="CTTamUng" />
-          <NavigationProperty Name="Quy" Relationship="QLTCModel.FK_TamUng_Quy" FromRole="TamUng" ToRole="Quy" />
-          <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_TamUng_TaiKhoan" FromRole="TamUng" ToRole="TaiKhoan" />
+          <NavigationProperty Name="CTTamUngs" Relationship="Self.FK_CTTamUng_TamUng" FromRole="TamUng" ToRole="CTTamUng" />
+          <NavigationProperty Name="Quy" Relationship="Self.FK_TamUng_Quy" FromRole="TamUng" ToRole="Quy" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_TamUng_TaiKhoan" FromRole="TamUng" ToRole="TaiKhoan" />
         </EntityType>
         <EntityType Name="ThanhToan">
           <Key>
@@ -458,8 +409,8 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Byte" />
-          <NavigationProperty Name="CongNo" Relationship="QLTCModel.FK_CTCongNo_CongNo" FromRole="ThanhToan" ToRole="CongNo" />
-          <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_ThanhToan_TaiKhoan" FromRole="ThanhToan" ToRole="TaiKhoan" />
+          <NavigationProperty Name="CongNo" Relationship="Self.FK_CTCongNo_CongNo" FromRole="ThanhToan" ToRole="CongNo" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_ThanhToan_TaiKhoan" FromRole="ThanhToan" ToRole="TaiKhoan" />
         </EntityType>
         <EntityType Name="ThuChi">
           <Key>
@@ -474,12 +425,12 @@
           <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="MaThuChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Byte" />
-          <NavigationProperty Name="Quy" Relationship="QLTCModel.FK_ThuChi_Quy" FromRole="ThuChi" ToRole="Quy" />
-          <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_ThuChi_Account" FromRole="ThuChi" ToRole="TaiKhoan" />
+          <NavigationProperty Name="Quy" Relationship="Self.FK_ThuChi_Quy" FromRole="ThuChi" ToRole="Quy" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_ThuChi_Account" FromRole="ThuChi" ToRole="TaiKhoan" />
         </EntityType>
         <Association Name="FK_CongNo_TaiKhoan">
-          <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-          <End Type="QLTCModel.CongNo" Role="CongNo" Multiplicity="*" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
               <PropertyRef Name="IDTaiKhoan" />
@@ -490,8 +441,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CTCongNo_CongNo">
-          <End Type="QLTCModel.CongNo" Role="CongNo" Multiplicity="0..1" />
-          <End Type="QLTCModel.ThanhToan" Role="ThanhToan" Multiplicity="*" />
+          <End Role="CongNo" Type="Self.CongNo" Multiplicity="0..1" />
+          <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CongNo">
               <PropertyRef Name="IDCongNo" />
@@ -502,8 +453,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VayNo_Quy">
-          <End Type="QLTCModel.Quy" Role="Quy" Multiplicity="0..1" />
-          <End Type="QLTCModel.CongNo" Role="CongNo" Multiplicity="*" />
+          <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+          <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Quy">
               <PropertyRef Name="IDQuy" />
@@ -514,8 +465,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CTTamUng_TamUng">
-          <End Type="QLTCModel.TamUng" Role="TamUng" Multiplicity="0..1" />
-          <End Type="QLTCModel.CTTamUng" Role="CTTamUng" Multiplicity="*" />
+          <End Role="TamUng" Type="Self.TamUng" Multiplicity="0..1" />
+          <End Role="CTTamUng" Type="Self.CTTamUng" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TamUng">
               <PropertyRef Name="IDTamUng" />
@@ -526,8 +477,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Quy_TaiKhoan">
-          <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-          <End Type="QLTCModel.Quy" Role="Quy" Multiplicity="*" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="Quy" Type="Self.Quy" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
               <PropertyRef Name="IDTaiKhoan" />
@@ -538,8 +489,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TamUng_Quy">
-          <End Type="QLTCModel.Quy" Role="Quy" Multiplicity="0..1" />
-          <End Type="QLTCModel.TamUng" Role="TamUng" Multiplicity="*" />
+          <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+          <End Role="TamUng" Type="Self.TamUng" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Quy">
               <PropertyRef Name="IDQuy" />
@@ -550,8 +501,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ThuChi_Quy">
-          <End Type="QLTCModel.Quy" Role="Quy" Multiplicity="0..1" />
-          <End Type="QLTCModel.ThuChi" Role="ThuChi" Multiplicity="*" />
+          <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+          <End Role="ThuChi" Type="Self.ThuChi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Quy">
               <PropertyRef Name="IDQuy" />
@@ -562,8 +513,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TamUng_TaiKhoan">
-          <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-          <End Type="QLTCModel.TamUng" Role="TamUng" Multiplicity="*" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="TamUng" Type="Self.TamUng" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
               <PropertyRef Name="IDTaiKhoan" />
@@ -574,8 +525,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ThanhToan_TaiKhoan">
-          <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-          <End Type="QLTCModel.ThanhToan" Role="ThanhToan" Multiplicity="*" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
               <PropertyRef Name="IDTaiKhoan" />
@@ -586,8 +537,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ThuChi_Account">
-          <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-          <End Type="QLTCModel.ThuChi" Role="ThuChi" Multiplicity="*" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="ThuChi" Type="Self.ThuChi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
               <PropertyRef Name="IDTaiKhoan" />
@@ -597,7 +548,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="QLTCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CongNoes" EntityType="Self.CongNo" />
+          <EntitySet Name="CTTamUngs" EntityType="Self.CTTamUng" />
+          <EntitySet Name="Quys" EntityType="Self.Quy" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+          <EntitySet Name="TamUngs" EntityType="Self.TamUng" />
+          <EntitySet Name="ThanhToans" EntityType="Self.ThanhToan" />
+          <EntitySet Name="ThuChis" EntityType="Self.ThuChi" />
+          <AssociationSet Name="FK_CongNo_TaiKhoan" Association="Self.FK_CongNo_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="CongNo" EntitySet="CongNoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTCongNo_CongNo" Association="Self.FK_CTCongNo_CongNo">
+            <End Role="CongNo" EntitySet="CongNoes" />
+            <End Role="ThanhToan" EntitySet="ThanhToans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VayNo_Quy" Association="Self.FK_VayNo_Quy">
+            <End Role="Quy" EntitySet="Quys" />
+            <End Role="CongNo" EntitySet="CongNoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTTamUng_TamUng" Association="Self.FK_CTTamUng_TamUng">
+            <End Role="TamUng" EntitySet="TamUngs" />
+            <End Role="CTTamUng" EntitySet="CTTamUngs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quy_TaiKhoan" Association="Self.FK_Quy_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="Quy" EntitySet="Quys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TamUng_Quy" Association="Self.FK_TamUng_Quy">
+            <End Role="Quy" EntitySet="Quys" />
+            <End Role="TamUng" EntitySet="TamUngs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuChi_Quy" Association="Self.FK_ThuChi_Quy">
+            <End Role="Quy" EntitySet="Quys" />
+            <End Role="ThuChi" EntitySet="ThuChis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TamUng_TaiKhoan" Association="Self.FK_TamUng_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="TamUng" EntitySet="TamUngs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThanhToan_TaiKhoan" Association="Self.FK_ThanhToan_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="ThanhToan" EntitySet="ThanhToans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuChi_Account" Association="Self.FK_ThuChi_Account">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="ThuChi" EntitySet="ThuChis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -606,122 +607,122 @@
           <EntitySetMapping Name="CongNoes">
             <EntityTypeMapping TypeName="QLTCModel.CongNo">
               <MappingFragment StoreEntitySet="CongNo">
-                <ScalarProperty Name="ConNo" ColumnName="ConNo" />
-                <ScalarProperty Name="Payed" ColumnName="Payed" />
-                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
-                <ScalarProperty Name="IDKhoanVay" ColumnName="IDKhoanVay" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="MaCongNo" ColumnName="MaCongNo" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
-                <ScalarProperty Name="MaSoThue" ColumnName="MaSoThue" />
-                <ScalarProperty Name="LaiSuat" ColumnName="LaiSuat" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="MucDich" ColumnName="MucDich" />
-                <ScalarProperty Name="IDQuy" ColumnName="IDQuy" />
                 <ScalarProperty Name="IDCongNo" ColumnName="IDCongNo" />
+                <ScalarProperty Name="IDQuy" ColumnName="IDQuy" />
+                <ScalarProperty Name="MucDich" ColumnName="MucDich" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LaiSuat" ColumnName="LaiSuat" />
+                <ScalarProperty Name="MaSoThue" ColumnName="MaSoThue" />
+                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="MaCongNo" ColumnName="MaCongNo" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IDKhoanVay" ColumnName="IDKhoanVay" />
+                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+                <ScalarProperty Name="Payed" ColumnName="Payed" />
+                <ScalarProperty Name="ConNo" ColumnName="ConNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CTTamUngs">
             <EntityTypeMapping TypeName="QLTCModel.CTTamUng">
               <MappingFragment StoreEntitySet="CTTamUng">
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
-                <ScalarProperty Name="IDTamUng" ColumnName="IDTamUng" />
                 <ScalarProperty Name="IDCTTamUng" ColumnName="IDCTTamUng" />
+                <ScalarProperty Name="IDTamUng" ColumnName="IDTamUng" />
+                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Quys">
             <EntityTypeMapping TypeName="QLTCModel.Quy">
               <MappingFragment StoreEntitySet="Quy">
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="MaQuy" ColumnName="MaQuy" />
-                <ScalarProperty Name="Info" ColumnName="Info" />
-                <ScalarProperty Name="Money" ColumnName="Money" />
-                <ScalarProperty Name="TenQuy" ColumnName="TenQuy" />
                 <ScalarProperty Name="IDQuy" ColumnName="IDQuy" />
+                <ScalarProperty Name="TenQuy" ColumnName="TenQuy" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="MaQuy" ColumnName="MaQuy" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="QLTCModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaiKhoans">
             <EntityTypeMapping TypeName="QLTCModel.TaiKhoan">
               <MappingFragment StoreEntitySet="TaiKhoan">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="POSITION" ColumnName="POSITION" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="POSITION" ColumnName="POSITION" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TamUngs">
             <EntityTypeMapping TypeName="QLTCModel.TamUng">
               <MappingFragment StoreEntitySet="TamUng">
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="MaTamUng" ColumnName="MaTamUng" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="IDQuy" ColumnName="IDQuy" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="HanThanhToan" ColumnName="HanThanhToan" />
-                <ScalarProperty Name="SoTienDaUng" ColumnName="SoTienDaUng" />
-                <ScalarProperty Name="MST" ColumnName="MST" />
                 <ScalarProperty Name="IDTamUng" ColumnName="IDTamUng" />
+                <ScalarProperty Name="MST" ColumnName="MST" />
+                <ScalarProperty Name="SoTienDaUng" ColumnName="SoTienDaUng" />
+                <ScalarProperty Name="HanThanhToan" ColumnName="HanThanhToan" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="IDQuy" ColumnName="IDQuy" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="MaTamUng" ColumnName="MaTamUng" />
+                <ScalarProperty Name="State" ColumnName="State" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ThanhToans">
             <EntityTypeMapping TypeName="QLTCModel.ThanhToan">
               <MappingFragment StoreEntitySet="ThanhToan">
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="SoTienTra" ColumnName="SoTienTra" />
-                <ScalarProperty Name="IDCongNo" ColumnName="IDCongNo" />
                 <ScalarProperty Name="IDThanhToan" ColumnName="IDThanhToan" />
+                <ScalarProperty Name="IDCongNo" ColumnName="IDCongNo" />
+                <ScalarProperty Name="SoTienTra" ColumnName="SoTienTra" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="State" ColumnName="State" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ThuChis">
             <EntityTypeMapping TypeName="QLTCModel.ThuChi">
               <MappingFragment StoreEntitySet="ThuChi">
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="MaThuChi" ColumnName="MaThuChi" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
-                <ScalarProperty Name="MucDich" ColumnName="MucDich" />
-                <ScalarProperty Name="IDQuy" ColumnName="IDQuy" />
                 <ScalarProperty Name="IDThuChi" ColumnName="IDThuChi" />
+                <ScalarProperty Name="IDQuy" ColumnName="IDQuy" />
+                <ScalarProperty Name="MucDich" ColumnName="MucDich" />
+                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="MaThuChi" ColumnName="MaThuChi" />
+                <ScalarProperty Name="State" ColumnName="State" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

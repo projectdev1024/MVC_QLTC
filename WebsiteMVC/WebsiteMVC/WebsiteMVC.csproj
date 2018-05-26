@@ -177,23 +177,12 @@
     <Compile Include="Controllers\ThanhToanController.cs" />
     <Compile Include="Controllers\ThuChiController.cs" />
     <Compile Include="Models\BaoCaoQuy.cs" />
-    <Compile Include="Models\Notify.cs" />
     <Compile Include="Models\CongNo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CTTamUng.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DTOExtention.cs" />
-    <Compile Include="Models\eRole.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Extention.cs" />
-    <Compile Include="Models\LoginHelper.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -209,6 +198,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notify.cs" />
+    <Compile Include="Models\DTOExtention.cs" />
+    <Compile Include="Models\eRole.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Extention.cs" />
+    <Compile Include="Models\LoginHelper.cs" />
     <Compile Include="Models\Quy.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -2698,13 +2698,6 @@
     <Content Include="Content\theme\assets\global\plugins\slider-revolution-slider\rs-plugin\js\.DS_Store" />
     <Content Include="Content\theme\assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="Content\theme\assets\global\plugins\uniform\README.md" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\amcharts\amcharts\plugins\dataloader\bower.json" />
     <Content Include="Content\amcharts\amcharts\plugins\dataloader\examples\data\gantt.json" />
     <Content Include="Content\amcharts\amcharts\plugins\dataloader\examples\data\gauge.json" />
@@ -2732,6 +2725,13 @@
     <Content Include="Content\amcharts\amcharts\plugins\responsive\readme.md" />
     <Content Include="Content\amcharts\amcharts\plugins\responsive\responsive.min.js.map" />
     <Content Include="Content\Excels\thuchi.xlsx" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

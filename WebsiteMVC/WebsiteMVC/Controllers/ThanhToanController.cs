@@ -67,7 +67,6 @@ namespace WebsiteMVC.Controllers
             {
                 congno.State = Notify.SUCCESS;
             }
-            thanhToan.ConNo = congno.Tra1Ngay * (congno.NgayTra - thanhToan.CreateTime).Value.Days - congno.Payed;
             congno.ConNo = congno.Tra1Ngay * (congno.NgayTra - thanhToan.CreateTime).Value.Days - congno.Payed;
             db.SaveChanges();
             return RedirectToAction("Index", "CongNo", new { thanhToan.IDCongNo });

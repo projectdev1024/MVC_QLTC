@@ -1,55 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QLTCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="QLTCEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="CongNoes" EntityType="QLTCModel.CongNo" />
-    <EntitySet Name="CTTamUngs" EntityType="QLTCModel.CTTamUng" />
-    <EntitySet Name="Quys" EntityType="QLTCModel.Quy" />
-    <EntitySet Name="sysdiagrams" EntityType="QLTCModel.sysdiagram" />
-    <EntitySet Name="TaiKhoans" EntityType="QLTCModel.TaiKhoan" />
-    <EntitySet Name="TamUngs" EntityType="QLTCModel.TamUng" />
-    <EntitySet Name="ThanhToans" EntityType="QLTCModel.ThanhToan" />
-    <EntitySet Name="ThuChis" EntityType="QLTCModel.ThuChi" />
-    <AssociationSet Name="FK_CongNo_TaiKhoan" Association="QLTCModel.FK_CongNo_TaiKhoan">
-      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-      <End Role="CongNo" EntitySet="CongNoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CTCongNo_CongNo" Association="QLTCModel.FK_CTCongNo_CongNo">
-      <End Role="CongNo" EntitySet="CongNoes" />
-      <End Role="ThanhToan" EntitySet="ThanhToans" />
-    </AssociationSet>
-    <AssociationSet Name="FK_VayNo_Quy" Association="QLTCModel.FK_VayNo_Quy">
-      <End Role="Quy" EntitySet="Quys" />
-      <End Role="CongNo" EntitySet="CongNoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CTTamUng_TamUng" Association="QLTCModel.FK_CTTamUng_TamUng">
-      <End Role="TamUng" EntitySet="TamUngs" />
-      <End Role="CTTamUng" EntitySet="CTTamUngs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Quy_TaiKhoan" Association="QLTCModel.FK_Quy_TaiKhoan">
-      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-      <End Role="Quy" EntitySet="Quys" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TamUng_Quy" Association="QLTCModel.FK_TamUng_Quy">
-      <End Role="Quy" EntitySet="Quys" />
-      <End Role="TamUng" EntitySet="TamUngs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ThuChi_Quy" Association="QLTCModel.FK_ThuChi_Quy">
-      <End Role="Quy" EntitySet="Quys" />
-      <End Role="ThuChi" EntitySet="ThuChis" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TamUng_TaiKhoan" Association="QLTCModel.FK_TamUng_TaiKhoan">
-      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-      <End Role="TamUng" EntitySet="TamUngs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ThanhToan_TaiKhoan" Association="QLTCModel.FK_ThanhToan_TaiKhoan">
-      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-      <End Role="ThanhToan" EntitySet="ThanhToans" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ThuChi_Account" Association="QLTCModel.FK_ThuChi_Account">
-      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-      <End Role="ThuChi" EntitySet="ThuChis" />
-    </AssociationSet>
-  </EntityContainer>
   <EntityType Name="CongNo">
     <Key>
       <PropertyRef Name="IDCongNo" />
@@ -69,9 +19,9 @@
     <Property Name="SoTien" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="Payed" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="ConNo" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_CongNo_TaiKhoan" FromRole="CongNo" ToRole="TaiKhoan" />
-    <NavigationProperty Name="ThanhToans" Relationship="QLTCModel.FK_CTCongNo_CongNo" FromRole="CongNo" ToRole="ThanhToan" />
-    <NavigationProperty Name="Quy" Relationship="QLTCModel.FK_VayNo_Quy" FromRole="CongNo" ToRole="Quy" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_CongNo_TaiKhoan" FromRole="CongNo" ToRole="TaiKhoan" />
+    <NavigationProperty Name="ThanhToans" Relationship="Self.FK_CTCongNo_CongNo" FromRole="CongNo" ToRole="ThanhToan" />
+    <NavigationProperty Name="Quy" Relationship="Self.FK_VayNo_Quy" FromRole="CongNo" ToRole="Quy" />
   </EntityType>
   <EntityType Name="CTTamUng">
     <Key>
@@ -84,7 +34,7 @@
     <Property Name="CreateBy" Type="Int32" />
     <Property Name="State" Type="Byte" />
     <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="TamUng" Relationship="QLTCModel.FK_CTTamUng_TamUng" FromRole="CTTamUng" ToRole="TamUng" />
+    <NavigationProperty Name="TamUng" Relationship="Self.FK_CTTamUng_TamUng" FromRole="CTTamUng" ToRole="TamUng" />
   </EntityType>
   <EntityType Name="Quy">
     <Key>
@@ -98,16 +48,16 @@
     <Property Name="State" Type="Byte" />
     <Property Name="CreateBy" Type="Int32" />
     <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CongNoes" Relationship="QLTCModel.FK_VayNo_Quy" FromRole="Quy" ToRole="CongNo" />
-    <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_Quy_TaiKhoan" FromRole="Quy" ToRole="TaiKhoan" />
-    <NavigationProperty Name="TamUngs" Relationship="QLTCModel.FK_TamUng_Quy" FromRole="Quy" ToRole="TamUng" />
-    <NavigationProperty Name="ThuChis" Relationship="QLTCModel.FK_ThuChi_Quy" FromRole="Quy" ToRole="ThuChi" />
+    <NavigationProperty Name="CongNoes" Relationship="Self.FK_VayNo_Quy" FromRole="Quy" ToRole="CongNo" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_Quy_TaiKhoan" FromRole="Quy" ToRole="TaiKhoan" />
+    <NavigationProperty Name="TamUngs" Relationship="Self.FK_TamUng_Quy" FromRole="Quy" ToRole="TamUng" />
+    <NavigationProperty Name="ThuChis" Relationship="Self.FK_ThuChi_Quy" FromRole="Quy" ToRole="ThuChi" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
       <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="principal_id" Type="Int32" Nullable="false" />
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
@@ -129,11 +79,11 @@
     <Property Name="POSITION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Active" Type="Boolean" />
-    <NavigationProperty Name="CongNoes" Relationship="QLTCModel.FK_CongNo_TaiKhoan" FromRole="TaiKhoan" ToRole="CongNo" />
-    <NavigationProperty Name="Quys" Relationship="QLTCModel.FK_Quy_TaiKhoan" FromRole="TaiKhoan" ToRole="Quy" />
-    <NavigationProperty Name="TamUngs" Relationship="QLTCModel.FK_TamUng_TaiKhoan" FromRole="TaiKhoan" ToRole="TamUng" />
-    <NavigationProperty Name="ThanhToans" Relationship="QLTCModel.FK_ThanhToan_TaiKhoan" FromRole="TaiKhoan" ToRole="ThanhToan" />
-    <NavigationProperty Name="ThuChis" Relationship="QLTCModel.FK_ThuChi_Account" FromRole="TaiKhoan" ToRole="ThuChi" />
+    <NavigationProperty Name="CongNoes" Relationship="Self.FK_CongNo_TaiKhoan" FromRole="TaiKhoan" ToRole="CongNo" />
+    <NavigationProperty Name="Quys" Relationship="Self.FK_Quy_TaiKhoan" FromRole="TaiKhoan" ToRole="Quy" />
+    <NavigationProperty Name="TamUngs" Relationship="Self.FK_TamUng_TaiKhoan" FromRole="TaiKhoan" ToRole="TamUng" />
+    <NavigationProperty Name="ThanhToans" Relationship="Self.FK_ThanhToan_TaiKhoan" FromRole="TaiKhoan" ToRole="ThanhToan" />
+    <NavigationProperty Name="ThuChis" Relationship="Self.FK_ThuChi_Account" FromRole="TaiKhoan" ToRole="ThuChi" />
   </EntityType>
   <EntityType Name="TamUng">
     <Key>
@@ -150,9 +100,9 @@
     <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="MaTamUng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="State" Type="Byte" />
-    <NavigationProperty Name="CTTamUngs" Relationship="QLTCModel.FK_CTTamUng_TamUng" FromRole="TamUng" ToRole="CTTamUng" />
-    <NavigationProperty Name="Quy" Relationship="QLTCModel.FK_TamUng_Quy" FromRole="TamUng" ToRole="Quy" />
-    <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_TamUng_TaiKhoan" FromRole="TamUng" ToRole="TaiKhoan" />
+    <NavigationProperty Name="CTTamUngs" Relationship="Self.FK_CTTamUng_TamUng" FromRole="TamUng" ToRole="CTTamUng" />
+    <NavigationProperty Name="Quy" Relationship="Self.FK_TamUng_Quy" FromRole="TamUng" ToRole="Quy" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_TamUng_TaiKhoan" FromRole="TamUng" ToRole="TaiKhoan" />
   </EntityType>
   <EntityType Name="ThanhToan">
     <Key>
@@ -161,13 +111,12 @@
     <Property Name="IDThanhToan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDCongNo" Type="Int32" />
     <Property Name="SoTienTra" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="ConNo" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="CreateBy" Type="Int32" />
     <Property Name="CreateTime" Type="DateTime" Precision="3" />
     <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="State" Type="Byte" />
-    <NavigationProperty Name="CongNo" Relationship="QLTCModel.FK_CTCongNo_CongNo" FromRole="ThanhToan" ToRole="CongNo" />
-    <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_ThanhToan_TaiKhoan" FromRole="ThanhToan" ToRole="TaiKhoan" />
+    <NavigationProperty Name="CongNo" Relationship="Self.FK_CTCongNo_CongNo" FromRole="ThanhToan" ToRole="CongNo" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_ThanhToan_TaiKhoan" FromRole="ThanhToan" ToRole="TaiKhoan" />
   </EntityType>
   <EntityType Name="ThuChi">
     <Key>
@@ -182,12 +131,12 @@
     <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="MaThuChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="State" Type="Byte" />
-    <NavigationProperty Name="Quy" Relationship="QLTCModel.FK_ThuChi_Quy" FromRole="ThuChi" ToRole="Quy" />
-    <NavigationProperty Name="TaiKhoan" Relationship="QLTCModel.FK_ThuChi_Account" FromRole="ThuChi" ToRole="TaiKhoan" />
+    <NavigationProperty Name="Quy" Relationship="Self.FK_ThuChi_Quy" FromRole="ThuChi" ToRole="Quy" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_ThuChi_Account" FromRole="ThuChi" ToRole="TaiKhoan" />
   </EntityType>
   <Association Name="FK_CongNo_TaiKhoan">
-    <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-    <End Type="QLTCModel.CongNo" Role="CongNo" Multiplicity="*" />
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TaiKhoan">
         <PropertyRef Name="IDTaiKhoan" />
@@ -198,8 +147,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CTCongNo_CongNo">
-    <End Type="QLTCModel.CongNo" Role="CongNo" Multiplicity="0..1" />
-    <End Type="QLTCModel.ThanhToan" Role="ThanhToan" Multiplicity="*" />
+    <End Role="CongNo" Type="Self.CongNo" Multiplicity="0..1" />
+    <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CongNo">
         <PropertyRef Name="IDCongNo" />
@@ -210,8 +159,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_VayNo_Quy">
-    <End Type="QLTCModel.Quy" Role="Quy" Multiplicity="0..1" />
-    <End Type="QLTCModel.CongNo" Role="CongNo" Multiplicity="*" />
+    <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+    <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Quy">
         <PropertyRef Name="IDQuy" />
@@ -222,8 +171,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CTTamUng_TamUng">
-    <End Type="QLTCModel.TamUng" Role="TamUng" Multiplicity="0..1" />
-    <End Type="QLTCModel.CTTamUng" Role="CTTamUng" Multiplicity="*" />
+    <End Role="TamUng" Type="Self.TamUng" Multiplicity="0..1" />
+    <End Role="CTTamUng" Type="Self.CTTamUng" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TamUng">
         <PropertyRef Name="IDTamUng" />
@@ -234,8 +183,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Quy_TaiKhoan">
-    <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-    <End Type="QLTCModel.Quy" Role="Quy" Multiplicity="*" />
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="Quy" Type="Self.Quy" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TaiKhoan">
         <PropertyRef Name="IDTaiKhoan" />
@@ -246,8 +195,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TamUng_Quy">
-    <End Type="QLTCModel.Quy" Role="Quy" Multiplicity="0..1" />
-    <End Type="QLTCModel.TamUng" Role="TamUng" Multiplicity="*" />
+    <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+    <End Role="TamUng" Type="Self.TamUng" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Quy">
         <PropertyRef Name="IDQuy" />
@@ -258,8 +207,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ThuChi_Quy">
-    <End Type="QLTCModel.Quy" Role="Quy" Multiplicity="0..1" />
-    <End Type="QLTCModel.ThuChi" Role="ThuChi" Multiplicity="*" />
+    <End Role="Quy" Type="Self.Quy" Multiplicity="0..1" />
+    <End Role="ThuChi" Type="Self.ThuChi" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Quy">
         <PropertyRef Name="IDQuy" />
@@ -270,8 +219,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TamUng_TaiKhoan">
-    <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-    <End Type="QLTCModel.TamUng" Role="TamUng" Multiplicity="*" />
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="TamUng" Type="Self.TamUng" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TaiKhoan">
         <PropertyRef Name="IDTaiKhoan" />
@@ -282,8 +231,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ThanhToan_TaiKhoan">
-    <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-    <End Type="QLTCModel.ThanhToan" Role="ThanhToan" Multiplicity="*" />
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TaiKhoan">
         <PropertyRef Name="IDTaiKhoan" />
@@ -294,8 +243,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ThuChi_Account">
-    <End Type="QLTCModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
-    <End Type="QLTCModel.ThuChi" Role="ThuChi" Multiplicity="*" />
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="ThuChi" Type="Self.ThuChi" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TaiKhoan">
         <PropertyRef Name="IDTaiKhoan" />
@@ -305,4 +254,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="QLTCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CongNoes" EntityType="Self.CongNo" />
+    <EntitySet Name="CTTamUngs" EntityType="Self.CTTamUng" />
+    <EntitySet Name="Quys" EntityType="Self.Quy" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+    <EntitySet Name="TamUngs" EntityType="Self.TamUng" />
+    <EntitySet Name="ThanhToans" EntityType="Self.ThanhToan" />
+    <EntitySet Name="ThuChis" EntityType="Self.ThuChi" />
+    <AssociationSet Name="FK_CongNo_TaiKhoan" Association="Self.FK_CongNo_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="CongNo" EntitySet="CongNoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTCongNo_CongNo" Association="Self.FK_CTCongNo_CongNo">
+      <End Role="CongNo" EntitySet="CongNoes" />
+      <End Role="ThanhToan" EntitySet="ThanhToans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VayNo_Quy" Association="Self.FK_VayNo_Quy">
+      <End Role="Quy" EntitySet="Quys" />
+      <End Role="CongNo" EntitySet="CongNoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTTamUng_TamUng" Association="Self.FK_CTTamUng_TamUng">
+      <End Role="TamUng" EntitySet="TamUngs" />
+      <End Role="CTTamUng" EntitySet="CTTamUngs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quy_TaiKhoan" Association="Self.FK_Quy_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="Quy" EntitySet="Quys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TamUng_Quy" Association="Self.FK_TamUng_Quy">
+      <End Role="Quy" EntitySet="Quys" />
+      <End Role="TamUng" EntitySet="TamUngs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThuChi_Quy" Association="Self.FK_ThuChi_Quy">
+      <End Role="Quy" EntitySet="Quys" />
+      <End Role="ThuChi" EntitySet="ThuChis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TamUng_TaiKhoan" Association="Self.FK_TamUng_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="TamUng" EntitySet="TamUngs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThanhToan_TaiKhoan" Association="Self.FK_ThanhToan_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="ThanhToan" EntitySet="ThanhToans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThuChi_Account" Association="Self.FK_ThuChi_Account">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="ThuChi" EntitySet="ThuChis" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>
